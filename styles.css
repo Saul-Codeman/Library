@@ -8,7 +8,7 @@ body {
 
 h1 {
     background-color: #474E59;
-    padding: 20px;
+    padding: 50px;
     margin: 0;
     text-align: center;
     color: white;
@@ -17,28 +17,53 @@ h1 {
 .add {
     background-color: #1C7C54;
     margin: 20px;
-    padding: 20px;
+    padding: 50px;
     border-radius: 5px;
 }
 
 .add > h3 {
-    text-align: center;
     color: white;
+}
+
+label {
+    color: white;
+    font-size: 18px;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.submit-button {
+    margin-left: 39%;
 }
 
 #library-container {
     background-color: #474E59;
     margin: 20px;
-    padding: 20px;
+    padding: 50px;
     border-radius: 5px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .card {
     background-color: white;
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
     width: 200px;
+    height: 200px;
     display: inline-block;
     border-radius: 5px;
     font-size: 18px;

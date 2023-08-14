@@ -5,7 +5,7 @@ class Book {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        this.isRead = false;
+        this.isRead = isRead;
     }
 }
 
@@ -34,10 +34,10 @@ function displayAllBooks() {
             buttons.className = "button-group";
 
             const readButton = document.createElement("button");
-            readButton.textContent = book.isRead ? "Mark Unread" : "Mark Read";
+            updateReadButton(readButton, book.isRead);
             readButton.addEventListener("click", function () {
                 book.isRead = !book.isRead;
-                readButton.textContent = book.isRead ? "Mark Unread" : "Mark Read";
+                updateReadButton(readButton, book.isRead);
             });
 
             const removeButton = document.createElement("button");
@@ -90,13 +90,17 @@ function addBookToDisplay(book, index) {
 }
 
 function updateReadButton(button, isRead) {
-    button.textContent = isRead ? "Mark Unread" : "Mark Read";
+    if (isRead) {
+        button.textContent = "Mark Unread";
+    } else {
+        button.textContent = "Mark Read";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     // Example usage
-    const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 218);
-    const book2 = new Book("To Kill a Mockingbird", "Harper Lee", 281);
+    const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 218, false);
+    const book2 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
 
     addBookToLibrary(book1);
     addBookToLibrary(book2);
