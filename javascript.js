@@ -56,6 +56,43 @@ function displayAllBooks() {
         }
 }
 
+function addBookToDisplay(book, index) {
+    const libraryContainer = document.getElementById("library-container");
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = `Title: ${book.title}\nAuthor: ${book.author}\nPages: ${book.pages}`;
+
+    // Create button group
+    const buttons = document.createElement("div");
+    buttons.className = "button-group";
+
+    const readButton = document.createElement("button");
+    updateReadButton(readButton, book.isRead);
+    readButton.addEventListener("click", function () {
+        book.isRead = !book.isRead;
+        updateReadButton(readButton, book.isRead);
+    });
+
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", function () {
+        removeBookFromLibrary(index);
+        card.remove(); // Remove the card from the DOM
+    });
+
+    buttons.appendChild(readButton);
+    buttons.appendChild(removeButton);
+
+    card.appendChild(buttons);
+
+    libraryContainer.appendChild(card);
+}
+
+function updateReadButton(button, isRead) {
+    button.textContent = isRead ? "Mark Unread" : "Mark Read";
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // Example usage
     const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 218);
@@ -65,4 +102,23 @@ document.addEventListener("DOMContentLoaded", function() {
     addBookToLibrary(book2);
 
     displayAllBooks();
+
+
+    const form = document.getElementById("add-book");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        const pages = document.getElementById("pages").value;
+        const hasRead = document.getElementById("has-read").checked;
+        
+        const newBook = new Book(title, author, pages, hasRead);
+        addBookToLibrary(newBook);
+        addBookToDisplay(newBook, myLibrary.length - 1);
+        
+        // Reset form fields
+        form.reset();
+    });
+
 });
